@@ -7,6 +7,18 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: rgb(59, 59, 59);
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.visible {
+    display: block;
+}
+.notVisible {
+    display: none;
 }
 
 /* impostazioni header */
@@ -14,18 +26,22 @@ header {
     height: 80px;
     background-color: lightgray;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
+/* impostazioni main */
 main {
-    background-color: grey;
-    height: calc(100vh - 80px);
+   width: 80%; 
+   margin: 0 auto;
+}
+
+.row {
+    height: 100%;
 }
 
 .card {
-    height: 200px;
-    width: 20%;
+    height: 600px;
     border: 1px solid black;
     float: left;
     background-color: lightseagreen;
@@ -33,4 +49,13 @@ main {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+}
+
+.card .poster {
+    padding: 20px;
+    width: 100%;
+}
+
+.fa-star.active {
+    color: gold;
 }
