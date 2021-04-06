@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <title>Boolflix</title>
+</head>
+<body>
+    <div class="container" id="root">
+        <header>
+            <input type="text" name="search" id="search" v-model="keyWord" @keyup.enter="sendData">
+            <input type="button" value="Search" @click="sendData">
+        </header>
+
+        <main>
+            <div class="card" v-for="film in filmList"> 
+                <div>Titolo: {{film.title}}</div> 
+                <div>Titolo originale: {{film.original_title}}</div>  
+                <div>Lingua originale: {{film.original_language}}</div> 
+                <div>Voto critica: {{film.vote_average}}</div>  
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

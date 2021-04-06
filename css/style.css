@@ -1,0 +1,36 @@
+/* impostazioni generali */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* impostazioni header */
+header {
+    height: 80px;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    background-color: grey;
+    height: calc(100vh - 80px);
+}
+
+.card {
+    height: 200px;
+    width: 20%;
+    border: 1px solid black;
+    float: left;
+    background-color: lightseagreen;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
