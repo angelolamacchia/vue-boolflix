@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: rgb(59, 59, 59);
+    background-color: rgba(27,27,27,255);
 }
 
 .container-fluid {
@@ -21,13 +21,42 @@ body {
     display: none;
 }
 
+.text_center {
+    text-align: center;
+}
+
 /* impostazioni header */
 header {
     height: 80px;
-    background-color: lightgray;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#logo {
+    padding-left: 20px;
+}
+
+.header_inputs {
+    padding-right: 30px;
+}
+
+.header_inputs input {
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+#search_btn {
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#search_btn i {
+    color: white;
+    font-size: 20px;
 }
 
 /* impostazioni main */
@@ -40,22 +69,42 @@ main {
     height: 100%;
 }
 
-.card {
-    height: 600px;
-    border: 1px solid black;
+.my_card {
+    height: 100%;
+    padding: 20px;
     float: left;
-    background-color: lightseagreen;
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
-.card .poster {
+.my_card_content {
+    border: 1px solid white;
+    background-color: black;
+    padding: 20px;
+}
+
+.my_card .poster {
     padding: 20px;
     width: 100%;
+    max-width: 300px;
 }
 
 .fa-star.active {
     color: gold;
+}
+
+/* media per mobile */
+@media screen and (max-width: 992px) {
+    .my_card {
+        height: 800px;
+    }
+
+    .my_card .poster {
+        width: 100%;
+        max-width: 400px;
+    }
 }

@@ -3,6 +3,9 @@ var root = new Vue ({
 
     data: {
         filmList: [],
+        filmListMod: [],
+        serieList: [],
+        serieListMod: [],
         keyWord: "",
     },
 
@@ -12,16 +15,42 @@ var root = new Vue ({
 
     methods: {
         sendData() {
-            axios.get("https://api.themoviedb.org/3/search/movie?api_key=52dbf5b6e21f1268285391475335cb84&query=" + this.keyWord),
-            axios.get("https://api.themoviedb.org/3/search/tv?api_key=52dbf5b6e21f1268285391475335cb84&query=" + this.keyWord)
+            axios.get("https://api.themoviedb.org/3/search/movie?api_key=52dbf5b6e21f1268285391475335cb84&language=it_IT&query=" + this.keyWord)
             .then( (result) =>{
-                console.log(result.data.results);
+                this.filmList = [],
+                this.filmListMod= [],
+
                 this.filmList = result.data.results;
 
-                this.filmList.vote_average = "prova";
+                console.log(this.filmList);
+                if (this.filmList.length > 0) {
+
+                    this.filmList.forEach( (element) => {
+                        if (!(element.poster_path == null)) {
+                            this.filmListMod.push(element);
+                        }
+                    });
+
+                };
             });
 
-            console.log(this.filmList.vote_average);
+            axios.get("https://api.themoviedb.org/3/search/tv?api_key=52dbf5b6e21f1268285391475335cb84&language=it_IT&query=" + this.keyWord)
+            .then( (result) =>{
+                this.serieList = [],
+                this.serieListMod= [],
+
+                this.serieList = result.data.results;
+
+                if (this.serieList.length > 0) {
+
+                    this.serieList.forEach( (element) => {
+                        if (!(element.poster_path == null)) {
+                            this.serieListMod.push(element);
+                        }
+                    });
+
+                };
+            });
         },
     },
 
