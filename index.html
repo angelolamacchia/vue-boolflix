@@ -23,64 +23,66 @@
             </div>
         </header>
 
-        <main>
-            <div class="row">
+        <div class="background">
+            <img :src="background" id="background" :class="background == '' ? 'notVisible' : null">
+        </div>
 
+        <main>
+
+            <h1>{{titleFilm}}</h1>
+            <div class="row film">
                 <!-- card film -->
                 <div class="my_card col-xl-3 col-lg-4 col-md-6 col-xs-12 d-flex align-items-stretch" v-for="film in filmListMod">
                     <div class="my_card_content">
                         <img :src=" 'https://image.tmdb.org/t/p/w342' + film.poster_path" class="poster">
-                        <div>Titolo: {{film.title}} </div> 
-                        <div>Titolo originale: {{film.original_title}} </div>  
-                        <div>
-                            Lingua originale: {{film.original_language}} 
-                            <div class="flag"> 
-                                <img :src=" (film.original_language == 'en') ? 'https://www.countryflags.io/gb/flat/64.png' : 
-                                (film.original_language == 'cs') ? 'https://www.countryflags.io/cz/flat/64.png' :
-                                (film.original_language == 'da') ? 'https://www.countryflags.io/dk/flat/64.png' :
-                                (film.original_language == 'ja') ? 'https://www.countryflags.io/jp/flat/64.png' :
-                                'https://www.countryflags.io/' + film.original_language + '/flat/64.png' " > 
-                            </div>
-                        </div> 
-                        <div>Voto critica: {{Math.ceil(film.vote_average * 5/10)}}</div>
-                        <div>
-                            <i class="fas fa-star" :class=" Math.ceil(film.vote_average* 5/10) > 0 ? 'active' : null"></i>
-                            <i class="fas fa-star" :class=" Math.ceil(film.vote_average* 5/10) > 1 ? 'active' : null"></i>
-                            <i class="fas fa-star" :class=" Math.ceil(film.vote_average* 5/10) > 2 ? 'active' : null"></i>
-                            <i class="fas fa-star" :class=" Math.ceil(film.vote_average* 5/10) > 3 ? 'active' : null"></i>
-                            <i class="fas fa-star" :class=" Math.ceil(film.vote_average* 5/10) > 4 ? 'active' : null"></i>
-                        </div> 
-                    </div>  
+                        <div class="my_card_text">
+                            <div>Titolo: {{film.title}} </div> 
+                            <div>Titolo originale: {{film.original_title}} </div>  
+                            <div>
+                                Lingua originale: {{film.original_language}} 
+                                <div class="flag"> 
+                                    <img :src="getFlag(film.original_language)">
+                                </div>
+                            </div> 
+                            <div>Voto critica: {{parseInt(film.vote_average * 5/10)}}</div> <!--trasformo i voti in valori da 1 a 5-->
+                            <div> <!--cambio le stelline in base al valore del voto-->
+                                <i class="fas fa-star" :class=" parseInt(film.vote_average* 5/10) > 0 ? 'active' : null"></i>
+                                <i class="fas fa-star" :class=" parseInt(film.vote_average* 5/10) > 1 ? 'active' : null"></i>
+                                <i class="fas fa-star" :class=" parseInt(film.vote_average* 5/10) > 2 ? 'active' : null"></i>
+                                <i class="fas fa-star" :class=" parseInt(film.vote_average* 5/10) > 3 ? 'active' : null"></i>
+                                <i class="fas fa-star" :class=" parseInt(film.vote_average* 5/10) > 4 ? 'active' : null"></i>
+                            </div> 
+                        </div>  
+                    </div>   
                 </div>
+            </div>
 
+            <h1>{{titleSerie}}</h1>
+            <div class="row serie">
                 <!-- card serie tv -->
                 <div class="my_card col-xl-3 col-lg-4 col-md-6 col-xs-12 d-flex align-items-stretch" v-for="serie in serieListMod"> 
                     <div class="my_card_content">
                         <img :src=" 'https://image.tmdb.org/t/p/w342' + serie.poster_path" class="poster">
-                        <div>Titolo: {{serie.name}}</div> 
-                        <div>Titolo originale: {{serie.original_name}}</div>  
-                        <div>
-                            Lingua originale: {{serie.original_language}} 
-                            <div class="flag"> 
-                                <img :src=" (serie.original_language == 'en') ? 'https://www.countryflags.io/gb/flat/64.png' : 
-                                (serie.original_language == 'cs') ? 'https://www.countryflags.io/cz/flat/64.png' :
-                                (serie.original_language == 'da') ? 'https://www.countryflags.io/dk/flat/64.png' :
-                                (serie.original_language == 'ja') ? 'https://www.countryflags.io/jp/flat/64.png' :
-                                'https://www.countryflags.io/' + serie.original_language + '/flat/64.png' " > 
-                            </div>
-                        </div> 
-                        <div>Voto critica: {{Math.ceil(serie.vote_average * 5/10)}}</div>
-                        <div>
-                            <i class="fas fa-star" :class=" Math.ceil(serie.vote_average* 5/10) > 0 ? 'active' : null"></i>
-                            <i class="fas fa-star" :class=" Math.ceil(serie.vote_average* 5/10) > 1 ? 'active' : null"></i>
-                            <i class="fas fa-star" :class=" Math.ceil(serie.vote_average* 5/10) > 2 ? 'active' : null"></i>
-                            <i class="fas fa-star" :class=" Math.ceil(serie.vote_average* 5/10) > 3 ? 'active' : null"></i>
-                            <i class="fas fa-star" :class=" Math.ceil(serie.vote_average* 5/10) > 4 ? 'active' : null"></i>
+                        <div class="my_card_text">
+                            <div>Titolo: {{serie.name}}</div> 
+                            <div>Titolo originale: {{serie.original_name}}</div>  
+                            <div>
+                                Lingua originale: {{serie.original_language}} 
+                                <div class="flag"> 
+                                    <img :src="getFlag(serie.original_language)"> 
+                                </div>
+                            </div> 
+                            <div>Voto critica: {{parseInt(serie.vote_average * 5/10)}}</div>
+                            <div>
+                                <i class="fas fa-star" :class=" parseInt(serie.vote_average* 5/10) > 0 ? 'active' : null"></i>
+                                <i class="fas fa-star" :class=" parseInt(serie.vote_average* 5/10) > 1 ? 'active' : null"></i>
+                                <i class="fas fa-star" :class=" parseInt(serie.vote_average* 5/10) > 2 ? 'active' : null"></i>
+                                <i class="fas fa-star" :class=" parseInt(serie.vote_average* 5/10) > 3 ? 'active' : null"></i>
+                                <i class="fas fa-star" :class=" parseInt(serie.vote_average* 5/10) > 4 ? 'active' : null"></i>
+                            </div> 
                         </div> 
                     </div>
                 </div>
-
-
             </div>
         </main>
     </div>

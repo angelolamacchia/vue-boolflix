@@ -12,6 +12,14 @@ body {
 
 .container-fluid {
     padding: 0;
+    /* background-image: url(../img/netflix.0.gif);
+    background-position: center;
+    background-size: cover;
+    height: 100vh; */
+}
+
+h1 {
+    color: white;
 }
 
 .visible {
@@ -59,6 +67,17 @@ header {
     font-size: 20px;
 }
 
+/* impostazioni background */
+#background {
+    min-width: 500px;
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+
 /* impostazioni main */
 main {
    width: 80%; 
@@ -69,9 +88,13 @@ main {
     height: 100%;
 }
 
+.film {
+    padding-bottom: 30px;
+}
+
 .my_card {
     height: 100%;
-    padding: 20px;
+    padding: 10px;
     float: left;
     color: white;
     display: flex;
@@ -79,18 +102,36 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
 }
 
 .my_card_content {
-    border: 1px solid white;
+    width: 100%;
+    border: 1px solid black;
     background-color: black;
-    padding: 20px;
 }
 
 .my_card .poster {
-    padding: 20px;
     width: 100%;
     max-width: 300px;
+}
+
+.my_card .my_card_text {
+    display: none;
+    width: 100%;
+    padding: 20px;
+}
+
+.my_card:hover .my_card_text {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.my_card:hover .poster {
+    opacity: 0.3;
 }
 
 .fa-star.active {
@@ -99,9 +140,6 @@ main {
 
 /* media per mobile */
 @media screen and (max-width: 992px) {
-    .my_card {
-        height: 800px;
-    }
 
     .my_card .poster {
         width: 100%;

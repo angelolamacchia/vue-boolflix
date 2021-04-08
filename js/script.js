@@ -7,6 +7,9 @@ var root = new Vue ({
         serieList: [],
         serieListMod: [],
         keyWord: "",
+        titleFilm: "",
+        titleSerie: "",
+        background: "img/netflix.0.gif",
     },
 
     // mounted() {
@@ -15,16 +18,19 @@ var root = new Vue ({
 
     methods: {
         sendData() {
-            axios.get("https://api.themoviedb.org/3/search/movie?api_key=52dbf5b6e21f1268285391475335cb84&language=it_IT&query=" + this.keyWord)
+            axios
+            .get("https://api.themoviedb.org/3/search/movie?api_key=52dbf5b6e21f1268285391475335cb84&language=it&query=" + this.keyWord)
             .then( (result) =>{
-                this.filmList = [],
-                this.filmListMod= [],
+                this.filmList = [];
+                this.filmListMod= [];
+                this.titleFilm= "Film";
+                this.background= "",
 
                 this.filmList = result.data.results;
 
                 console.log(this.filmList);
                 if (this.filmList.length > 0) {
-
+                    // creo un nuovo array solo con i film con poster
                     this.filmList.forEach( (element) => {
                         if (!(element.poster_path == null)) {
                             this.filmListMod.push(element);
@@ -34,15 +40,17 @@ var root = new Vue ({
                 };
             });
 
-            axios.get("https://api.themoviedb.org/3/search/tv?api_key=52dbf5b6e21f1268285391475335cb84&language=it_IT&query=" + this.keyWord)
+            axios
+            .get("https://api.themoviedb.org/3/search/tv?api_key=52dbf5b6e21f1268285391475335cb84&language=it&query=" + this.keyWord)
             .then( (result) =>{
-                this.serieList = [],
-                this.serieListMod= [],
+                this.serieList = [];
+                this.serieListMod= [];
+                this.titleSerie= "Serie tv";
 
                 this.serieList = result.data.results;
 
                 if (this.serieList.length > 0) {
-
+                    // creo un nuovo array solo con le serie con poster
                     this.serieList.forEach( (element) => {
                         if (!(element.poster_path == null)) {
                             this.serieListMod.push(element);
@@ -51,6 +59,46 @@ var root = new Vue ({
 
                 };
             });
+        },
+
+        getFlag(country) {
+            switch (country) {
+                case "en": 
+                    return 'https://www.countryflags.io/gb/flat/64.png';
+                    break;
+
+                case "cs":
+                    return 'https://www.countryflags.io/cz/flat/64.png';
+                    break;
+
+                case "da":
+                    return 'https://www.countryflags.io/dk/flat/64.png';
+                    break;
+
+                case "ja":
+                    return 'https://www.countryflags.io/jp/flat/64.png';
+                    break;
+
+                case "hi":
+                    return 'https://www.countryflags.io/in/flat/64.png';
+                    break;
+
+                case "zh":
+                    return 'https://www.countryflags.io/cn/flat/64.png';
+                    break;
+
+                case "ko":
+                    return 'https://www.countryflags.io/kr/flat/64.png';
+                    break;
+
+                default:
+                    return 'https://www.countryflags.io/' + country + '/flat/64.png';
+            } 
+              
+        },
+
+        getSerieFlag(flag) {
+
         },
     },
 
