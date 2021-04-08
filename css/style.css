@@ -90,6 +90,7 @@ main {
 
 .film {
     padding-bottom: 30px;
+    margin: 0 auto;
 }
 
 .my_card {
@@ -102,24 +103,24 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative;
 }
 
-.my_card_content {
-    width: 100%;
-    border: 1px solid black;
-    background-color: black;
+.my_card .my_card_image {
+    position: relative;
 }
 
 .my_card .poster {
     width: 100%;
     max-width: 300px;
+    opacity: 1;
+    transition: 0.8s;
+    border: 3px solid black;
 }
 
 .my_card .my_card_text {
     display: none;
     width: 100%;
-    padding: 20px;
+    padding: 0 20px;
 }
 
 .my_card:hover .my_card_text {
@@ -131,6 +132,7 @@ main {
 }
 
 .my_card:hover .poster {
+    transition: opacity 0.5s;
     opacity: 0.3;
 }
 
@@ -138,11 +140,10 @@ main {
     color: gold;
 }
 
-/* media per mobile */
-@media screen and (max-width: 992px) {
-
-    .my_card .poster {
-        width: 100%;
-        max-width: 400px;
+/* media per display xl */
+@media screen and (min-width: 1600px) {
+    .my_card {
+        max-width: 300px;
+        margin: 0 auto;
     }
 }

@@ -34,7 +34,9 @@
                 <!-- card film -->
                 <div class="my_card col-xl-3 col-lg-4 col-md-6 col-xs-12 d-flex align-items-stretch" v-for="film in filmListMod">
                     <div class="my_card_content">
-                        <img :src=" 'https://image.tmdb.org/t/p/w342' + film.poster_path" class="poster">
+                        <div class="my_card_image">
+                            <img :src=" 'https://image.tmdb.org/t/p/w342' + film.poster_path" class="poster">
+                        </div>
                         <div class="my_card_text">
                             <div>Titolo: {{film.title}} </div> 
                             <div>Titolo originale: {{film.original_title}} </div>  
