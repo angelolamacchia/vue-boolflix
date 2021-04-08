@@ -103,6 +103,7 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
 }
 
 .my_card .my_card_image {
@@ -111,7 +112,6 @@ main {
 
 .my_card .poster {
     width: 100%;
-    max-width: 300px;
     opacity: 1;
     transition: 0.8s;
     border: 3px solid black;
@@ -119,8 +119,8 @@ main {
 
 .my_card .my_card_text {
     display: none;
-    width: 100%;
     padding: 0 20px;
+    width: 100%;
 }
 
 .my_card:hover .my_card_text {
@@ -138,6 +138,29 @@ main {
 
 .fa-star.active {
     color: gold;
+}
+
+.info {
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.popUp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 90%);
+    padding: 30px;
+}
+
+.popUp .fas {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 /* media per display xl */

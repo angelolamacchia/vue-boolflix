@@ -10,6 +10,10 @@ var root = new Vue ({
         titleFilm: "",
         titleSerie: "",
         background: "img/netflix.0.gif",
+        popUpVis: "notVisible",
+        filmCounter: "NaN",
+        filmId: "",
+        actors: [],
     },
 
     // mounted() {
@@ -93,13 +97,27 @@ var root = new Vue ({
 
                 default:
                     return 'https://www.countryflags.io/' + country + '/flat/64.png';
-            } 
-              
+            }         
         },
 
-        getSerieFlag(flag) {
-
+        popUpShow(index) {
+            this.filmCounter = index;
+            
+            this.filmId = this.filmListMod[index].id;
+            
+            axios
+            .get("https://api.themoviedb.org/3/movie/" + this.filmId + "/credits?api_key=52dbf5b6e21f1268285391475335cb84")
+            .then( (result) => {
+                this.actors= [];
+                for (let i=0; i<5; i++) {
+                    this.actors.push(result.data.cast[i].name);
+                }
+            });
         },
+        popUpClose(index) {
+            this.filmCounter = 'NaN';
+        }
+        
     },
 
 });
