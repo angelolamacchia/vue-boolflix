@@ -43,6 +43,7 @@ header {
 
 #logo {
     padding-left: 20px;
+    cursor: pointer;
 }
 
 .header_inputs {
@@ -154,19 +155,31 @@ main {
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 90%);
-    padding: 30px;
+    padding: 10px;
 }
 
 .popUp .fas {
     position: absolute;
     top: 20px;
     right: 20px;
+    cursor: pointer;
+}
+
+.actors {
+    height: 42%;
+    overflow: auto;
+}
+
+.trama {
+    padding: 20px 0;
+    height: 58%;
+    overflow: auto;
 }
 
 /* media per display xl */
 @media screen and (min-width: 1600px) {
     .my_card {
         max-width: 300px;
-        margin: 0 auto;
+        
     }
 }

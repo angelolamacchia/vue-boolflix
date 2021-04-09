@@ -12,8 +12,13 @@ var root = new Vue ({
         background: "img/netflix.0.gif",
         popUpVis: "notVisible",
         filmCounter: "NaN",
+        serieCounter: "NaN",
         filmId: "",
-        actors: [],
+        serieId: "",
+        filmActors: [],
+        serieActors: [],
+        filmDescription: "",
+        serieDescription: "",
     },
 
     // mounted() {
@@ -22,7 +27,7 @@ var root = new Vue ({
 
     methods: {
         sendData() {
-            axios
+            axios //chiamata per i film
             .get("https://api.themoviedb.org/3/search/movie?api_key=52dbf5b6e21f1268285391475335cb84&language=it&query=" + this.keyWord)
             .then( (result) =>{
                 this.filmList = [];
@@ -32,7 +37,6 @@ var root = new Vue ({
 
                 this.filmList = result.data.results;
 
-                console.log(this.filmList);
                 if (this.filmList.length > 0) {
                     // creo un nuovo array solo con i film con poster
                     this.filmList.forEach( (element) => {
@@ -44,7 +48,7 @@ var root = new Vue ({
                 };
             });
 
-            axios
+            axios //chiamata per le serie
             .get("https://api.themoviedb.org/3/search/tv?api_key=52dbf5b6e21f1268285391475335cb84&language=it&query=" + this.keyWord)
             .then( (result) =>{
                 this.serieList = [];
@@ -66,7 +70,7 @@ var root = new Vue ({
         },
 
         getFlag(country) {
-            switch (country) {
+            switch (country) { //modifico le lingue in base alla nazione
                 case "en": 
                     return 'https://www.countryflags.io/gb/flat/64.png';
                     break;
@@ -100,22 +104,62 @@ var root = new Vue ({
             }         
         },
 
-        popUpShow(index) {
+        // popup per i film
+        filmPopUpShow(index) {
             this.filmCounter = index;
             
             this.filmId = this.filmListMod[index].id;
             
-            axios
-            .get("https://api.themoviedb.org/3/movie/" + this.filmId + "/credits?api_key=52dbf5b6e21f1268285391475335cb84")
+            axios //chiamata per gli attori
+            .get("https://api.themoviedb.org/3/movie/" + this.filmId + "/credits?api_key=52dbf5b6e21f1268285391475335cb84&language=it")
             .then( (result) => {
-                this.actors= [];
-                for (let i=0; i<5; i++) {
-                    this.actors.push(result.data.cast[i].name);
-                }
+                this.filmActors= []; 
+
+                for (let i=0; i<5; i++) { //popolo l'array con 5 attori
+                    this.filmActors.push(result.data.cast[i].name);
+                };
             });
+
+            this.filmDescription = "";
+            //aggiungo la descrizione
+            this.filmDescription = this.filmListMod[this.filmCounter].overview;
+
         },
-        popUpClose(index) {
+        filmPopUpClose() { //quando chiudo svuoto tutto
+            this.filmActors = [];
             this.filmCounter = 'NaN';
+            this.filmDescription = "";
+        },
+
+        // popup per le serie tv
+        seriePopUpShow(index) {
+            this.serieCounter = index;
+            
+            this.serieId = this.serieListMod[index].id;
+            
+            axios //chiamata per gli attori
+            .get("https://api.themoviedb.org/3/tv/" + this.serieId + "/credits?api_key=52dbf5b6e21f1268285391475335cb84&language=it")
+            .then( (result) => {
+                this.serieActors= []; 
+
+                for (let i=0; i<5; i++) { //popolo l'array con 5 attori
+                    this.serieActors.push(result.data.cast[i].name);
+                };
+            });
+
+            this.serieDescription = "";
+            //aggiungo la descrizione
+            this.serieDescription = this.serieListMod[this.serieCounter].overview;
+
+        },
+        seriePopUpClose() { //quando chiudo svuoto tutto
+            this.serieActors = [];
+            this.serieCounter = 'NaN';
+            this.serieDescription = "";
+        },
+
+        refresh() { //cliccando sul logo ricarica la pagina
+            location.reload();
         }
         
     },

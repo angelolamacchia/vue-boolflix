@@ -16,7 +16,7 @@
 <body>
     <div class="container-fluid" id="root">
         <header>
-            <img src="img/boolflix.png" id="logo">
+            <img src="img/boolflix.png" id="logo" @click="refresh()">
             <div class="header_inputs">
                 <input type="text" name="search" id="search" v-model="keyWord" @keyup.enter="sendData">
                 <button @click="sendData" id="search_btn"><i class="fas fa-search"></i></button>    
@@ -54,13 +54,16 @@
                                 <i class="fas fa-star" :class=" parseInt(film.vote_average* 5/10) > 3 ? 'active' : null"></i>
                                 <i class="fas fa-star" :class=" parseInt(film.vote_average* 5/10) > 4 ? 'active' : null"></i>
                             </div> 
-                            <div class="info" @click="popUpShow(index)"><i class="fas fa-info-circle"></i></div>
+                            <div class="info" @click="filmPopUpShow(index)"><i class="fas fa-info-circle"></i></div>
                         </div>  
                     </div> 
                     <div class="popUp" :class="filmCounter == index ? 'visible' : 'notVisible' ">
-                        <i class="fas fa-times" @click="popUpClose(index)"></i>
-                        <div style="padding: 20px;">Attori principali:</div>
-                        <div v-for="actor in actors">{{actor}}</div>
+                        <i class="fas fa-times" @click="filmPopUpClose()"></i>
+                        <div class="actors">
+                            <div style="padding: 10px;">Attori principali:</div>
+                            <div v-for="actor in filmActors">{{actor}}</div>
+                        </div>
+                        <div class="trama">{{filmDescription}}</div>
                     </div>  
                 </div>
             </div>
@@ -68,7 +71,7 @@
             <h1>{{titleSerie}}</h1>
             <div class="row serie">
                 <!-- card serie tv -->
-                <div class="my_card col-xl-3 col-lg-4 col-md-6 col-xs-12 align-items-stretch" v-for="serie in serieListMod"> 
+                <div class="my_card col-xl-3 col-lg-4 col-md-6 col-xs-12 align-items-stretch" v-for="(serie, index) in serieListMod"> 
                     <div class="my_card_content">
                         <img :src=" 'https://image.tmdb.org/t/p/w342' + serie.poster_path" class="poster">
                         <div class="my_card_text">
@@ -88,8 +91,17 @@
                                 <i class="fas fa-star" :class=" parseInt(serie.vote_average* 5/10) > 3 ? 'active' : null"></i>
                                 <i class="fas fa-star" :class=" parseInt(serie.vote_average* 5/10) > 4 ? 'active' : null"></i>
                             </div> 
+                            <div class="info" @click="seriePopUpShow(index)"><i class="fas fa-info-circle"></i></div>
                         </div> 
                     </div>
+                    <div class="popUp" :class="serieCounter == index ? 'visible' : 'notVisible' ">
+                        <i class="fas fa-times" @click="seriePopUpClose()"></i>
+                        <div class="actors">
+                            <div style="padding: 10px;">Attori principali:</div>
+                            <div v-for="actor in serieActors">{{actor}}</div>
+                        </div>
+                        <div class="trama">{{serieDescription}}</div>
+                    </div>  
                 </div>
             </div>
         </main>
